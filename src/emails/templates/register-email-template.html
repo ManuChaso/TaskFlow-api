@@ -13,18 +13,26 @@
             padding: 20px;
         }
         .container {
-            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 60%;
             margin: 0 auto;
-            background: #dadada;
+            background: #2BB9ED;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        img{
+            width: 500px;
+        }
         h1 {
-            color: black;
+            font-size: 20px;
+            color: white;
         }
         p {
-            color: black;
+            color: white;
         }
         .button {
             display: inline-block;
@@ -45,10 +53,34 @@
         .button:hover {
             background-color: #45a049;
         }
+        .button:visited {
+            color: white;
+            background-color: #2a58b9;
+        }
+
+        @media (300px <= width <= 700px){
+            .container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                max-width: 90%;
+                margin: 0 auto;
+                background: #dadada;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            img{
+                width: 300px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="https://res.cloudinary.com/diayofeom/image/upload/v1718556522/taskFlow-logo_jvwvvb.png" alt="">
         <h1>¡Bienvenido a TaskFlow!</h1>
         <p>Verifica tu correo electronico</p>
         <a href="{{link}}" class="button">Verificar Email</a>
