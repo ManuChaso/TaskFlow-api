@@ -6,11 +6,19 @@ async function getProfile(req, res){
 
         const user = await userModel.findOne({email: email});
 
-        res.status(200).send({
-            message: 'User profile',
-            success: true,
-            profile: user
-        });
+
+        if(user){
+            res.status(200).send({
+                message: 'User profile',
+                success: true,
+                profile: user
+            });
+        }else{
+            res.status(404).send({
+                message: 'Profile not found',
+                success: false,
+            })
+        }
     } catch(err){
         console.error('Error getting project', err);
         res.status(500).send({

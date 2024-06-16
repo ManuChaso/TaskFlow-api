@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 
 
 function registerEmail(email, pass){
-    const loginLink = `http://localhost:5173/verify-account?email=${email}&pass=${pass}`
+    const loginLink = `https://taskflow-ts0l.onrender.com/verify-account?email=${email}&pass=${pass}`
     const htmlTemplate = registerTemplate.replace('{{link}}', loginLink);
 
     const mailOptions = {
