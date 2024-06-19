@@ -14,6 +14,9 @@ const importProject = require('../controllers/import-project');
 
 
 function routes(app){
+    app.get('/stay-alive', () => console.log('👍'));
+
+
     app.post('/register', verify, Register);
     app.post('/verify-account', verify, verifyAccount);
     app.post('/login', verify, Login);
