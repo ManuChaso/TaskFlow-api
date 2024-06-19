@@ -10,7 +10,13 @@ async function getProject(req, res){
 
         const userProject = await projectModel.findById(projectId);
 
-        if(userProject.members.includes(user._id)){
+        const membersIds = userProject.members.map(member => member.id.toString());
+
+        console.log(membersIds);
+
+        console.log('mi id: ', user._id)
+
+        if(membersIds.includes(user._id.toString())){
             res.status(200).send({
                 message: `Project: ${userProject.name}`,
                 success: true,
@@ -18,7 +24,7 @@ async function getProject(req, res){
             })
         }else{
             res.status(401).send({
-                message: 'Unauthorized',
+                message: 'ñuñautorised',
                 success: false
             });
         }

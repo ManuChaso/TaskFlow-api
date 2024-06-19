@@ -17,7 +17,7 @@ async function createProject(req, res){
         });
 
         const projectSaved = await newProject.save();
-        res.status(200).send({
+        res.status(201).send({
             message: 'Project created',
             success: true,
             project: projectSaved

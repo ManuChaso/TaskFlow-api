@@ -10,6 +10,7 @@ const getProject = require('../controllers/get-project');
 const getProfile = require('../controllers/get-profile');
 const accountVerified = require('../middlewares/accountVerified');
 const verifyAccount = require('../controllers/verify-account');
+const importProject = require('../controllers/import-project');
 
 
 function routes(app){
@@ -20,6 +21,7 @@ function routes(app){
     app.get('/get-profile', verify, verifyUser, getProfile);
 
     app.post('/create-project', verify, verifyUser, accountVerified, createProject);
+    app.post('/import-project', verify, verifyUser, accountVerified, importProject)
     app.post('/delete-project', verify, verifyUser, accountVerified, deleteProject);
 
     app.get('/get-projects', verify, verifyUser, accountVerified, getProjects);
