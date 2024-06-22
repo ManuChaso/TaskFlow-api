@@ -133,6 +133,36 @@ const action = {
         }
     },
 
+    changeTaskState: async (client, ws, data) => {
+        try{
+            const cardId = data.cardId;
+            const taskId = data.taskId;
+            const newState = data.newState;
+
+            const projectUpdated = await projectModel.findByIdAndUpdate(
+                connections.get(client),
+                {
+                    $set: { 'cards.$[cardElem].tasks.$[taskElem].state': newState }
+                },
+                {
+                    arrayFilters: [
+                        { 'cardElem._id': cardId },
+                        { 'taskElem._id': taskId }
+                    ],
+                    new: true
+                }
+            );
+
+            const response = {
+                project: projectUpdated
+            }
+
+            action.sendMessage(ws, client, response);
+        } catch(err) {
+            console.error('Error updating task state', err);
+        }
+    },
+
     updateTask: async (client, ws, data) => {
         try{
             const cardId = data.cardId

@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
-    name: String
+    name: String,
+    state: {
+        type: String,
+        enum: ['pending', 'urgent', 'progress', 'done'],
+      },
 })
 
 const cardSchema = new Schema({
