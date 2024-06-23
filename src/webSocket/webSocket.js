@@ -36,12 +36,30 @@ const action = {
             const projectUpdated = await projectModel.findByIdAndUpdate(projectId, {$push: {messages: message}}, {new: true})
 
             const response = {
-                project: projectUpdated
+                project: projectUpdated,
+                message: true
             }
             
             action.sendMessage(ws, client, response);
         } catch(err) {
             console.error('Error sending message', err);
+        }
+    },
+
+    deleteMessage: async (client, ws, data) => {
+        try{
+            const projectId = data.projectId;
+            const messageId = data.messageId;
+
+            const projectUpdated = await projectModel.findByIdAndUpdate(projectId, {$pull: {messages: {_id: messageId}}}, {new: true});
+
+            const response = {
+                project: projectUpdated
+            };
+
+            action.sendMessage(ws, client, response);
+        } catch(err){
+            console.error('Error deleting message', err);
         }
     },
 
