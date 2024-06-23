@@ -22,12 +22,18 @@ const memberSchema = new Schema({
     name: String
 })
 
+const messageSchema = new Schema({
+    owner: String,
+    text: String
+})
+
 const projectSchema = new Schema({
     owner: String,
     name: String,
     description: String,
     members: [memberSchema],
     cards: [cardSchema],
+    messages: [messageSchema]
 });
 
 const projectModel = mongoose.model('project', projectSchema);

@@ -20,6 +20,31 @@ const action = {
         }
     },
 
+    chatMessage: async (client, ws, data) =>{
+        try{
+            const projectId = data.projectId;
+            const userId = data.userId
+            const messageText = data.messageText;
+
+            const user = await userModel.findById(userId);
+
+            const message = {
+                owner: user.userName,
+                text: messageText
+            }
+
+            const projectUpdated = await projectModel.findByIdAndUpdate(projectId, {$push: {messages: message}}, {new: true})
+
+            const response = {
+                project: projectUpdated
+            }
+            
+            action.sendMessage(ws, client, response);
+        } catch(err) {
+            console.error('Error sending message', err);
+        }
+    },
+
     startSession: async (client, ws, data) => {
         try{
             connections.set(client, data.projectId);
